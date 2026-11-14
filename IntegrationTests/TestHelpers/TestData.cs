@@ -1,6 +1,7 @@
 ﻿using Application.Features.ExerciseSets.StartExerciseSet;
 using Domain;
 using Infrastructure;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -65,5 +66,14 @@ public static class TestData
         using IServiceScope scope = factory.Services.CreateScope();
         AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         return await db.ExerciseSetAttempts.SingleAsync(a => a.Id == attemptId);
+    }
+
+    // Makes the database give the next student this id, so a test can search for an id that cannot appear by chance
+    public static async Task SetNextStudentIdAsync(this WebApplicationFactory<Program> factory, int id)
+    {
+        using IServiceScope scope = factory.Services.CreateScope();
+        AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        string sql = "DBCC CHECKIDENT ('Students', RESEED, " + (id - 1) + ")";
+        await db.Database.ExecuteSqlRawAsync(sql);
     }
 }

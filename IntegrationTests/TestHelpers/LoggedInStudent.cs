@@ -8,18 +8,20 @@ using Application.Features.Students.CreateStudentProfile;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace IntegrationTests.TestHelpers;
 
 // A student who is logged in. The client sends the student's token with every request
-public sealed record LoggedInStudent(HttpClient Client, int StudentId);
+public sealed record LoggedInStudent(HttpClient Client, int StudentId, string Username);
 
 public static class StudentRequests
 {
     private const string Password = "hemmelig1";
+    public const string ParentEmail = "parent@example.com";
 
     // Creates a student through the API and logs in, the same way the app does
-    public static async Task<LoggedInStudent> CreateLoggedInStudentAsync(this MatMentorApiFactory factory, int grade, params int[] interestIds)
+    public static async Task<LoggedInStudent> CreateLoggedInStudentAsync(this WebApplicationFactory<Program> factory, int grade, params int[] interestIds)
     {
         HttpClient client = factory.CreateClient();
         // Unique, so tests that share a database do not collide
@@ -39,7 +41,7 @@ public static class StudentRequests
         AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         int? studentId = await db.Users.Where(u => u.UserName == username).Select(u => u.StudentId).SingleAsync();
 
-        return new LoggedInStudent(client, studentId!.Value);
+        return new LoggedInStudent(client, studentId!.Value, username);
     }
 
     public static Task<HttpResponseMessage> PostStartAsync(this LoggedInStudent student, int topicId)
