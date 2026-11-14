@@ -31,6 +31,16 @@ public class ExerciseTests
         Assert.False(isCorrect);
     }
 
+    // Correct answers must be stored with a comma, so a period means the exercise data is invalid
+    [Fact]
+    [Trait("TestCase", "TC-011")]
+    public void IsAnswerCorrect_CorrectAnswerWithPeriod_ThrowsInvalidOperationException()
+    {
+        var exercise = CreateExerciseWithCorrectAnswer("3.5");
+
+        Assert.Throws<InvalidOperationException>(() => exercise.IsAnswerCorrect("3,5"));
+    }
+
     // Only the correct answer matters for these tests, so the other values are placeholders
     private static Exercise CreateExerciseWithCorrectAnswer(string correctAnswer)
         => new(position: 1, exerciseText: "Test exercise", correctAnswer: correctAnswer, unit: null, exerciseSetId: 1, topicId: 1);
