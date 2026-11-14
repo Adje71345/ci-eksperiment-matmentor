@@ -9,8 +9,8 @@
 
 	<ItemGroup>
 		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-		<!-- The endpoint overview the app is built against. The Api build regenerates it, so the tests read the current version -->
-		<None Include="..\docs\Api.json" Link="Contracts\Api.json" CopyToOutputDirectory="PreserveNewest" />
+		<!-- The approved contract with the app. Needs to be updated when an endpoint changes. -->
+		<None Include="Contracts\Api.approved.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
 	<ItemGroup>
