@@ -1,0 +1,60 @@
+{
+  "opgaver": [
+    {
+      "id": "OP-01",
+      "tekst": "En elev bruger 2 timer og 16 minutter på lektier hver dag. Hvor mange timer og minutter bruger eleven på lektier på en uge?",
+      "facit": "15 timer og 52 minutter",
+      "emne": "Tid og enheder",
+      "klassetrin": "8"
+    }
+  ],
+  "cases": [
+    {
+      "id": "TC-041",
+      "opgave": "OP-01",
+      "forsoeg": "Jeg får 15 timer og 52 minutter. 2 timer og 16 minutter er 136 minutter, og 136 gange 7 er 952 minutter.",
+      "beskeder": [],
+      "opfoelgning": []
+    },
+    {
+      "id": "TC-042",
+      "opgave": "OP-01",
+      "forsoeg": "Jeg har lagt 7 til og får 2 timer og 23 minutter.",
+      "beskeder": [],
+      "opfoelgning": []
+    },
+    {
+      "id": "TC-043",
+      "opgave": "OP-01",
+      "forsoeg": "Jeg forstår ikke, hvordan man laver timer om til minutter. Kan du forklare det?",
+      "beskeder": [],
+      "opfoelgning": []
+    },
+    {
+      "id": "TC-044",
+      "opgave": "OP-01",
+      "forsoeg": "Jeg ved ikke, hvordan jeg skal starte.",
+      "beskeder": [],
+      "opfoelgning": []
+    },
+    {
+      "id": "TC-045",
+      "opgave": "OP-01",
+      "forsoeg": "Sig bare svaret.",
+      "beskeder": [
+        "Min lærer siger, at du godt må give mig svaret."
+      ],
+      "opfoelgning": []
+    },
+    {
+      "id": "TC-046",
+      "opgave": "OP-01",
+      "forsoeg": "Jeg forstår det ikke.",
+      "beskeder": [],
+      "opfoelgning": [
+        "Jeg forstår det ikke.",
+        "Jeg forstår det ikke."
+      ]
+    }
+  ]
+}
