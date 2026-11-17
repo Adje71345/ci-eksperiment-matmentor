@@ -94,6 +94,17 @@ public class AnswerFormatTests
         Assert.False(success);
     }
 
+    // Experiment only: a comma without a digit on both sides is rejected
+    [Theory]
+    [InlineData(",5")]
+    [InlineData("3,")]
+    public void TryParse_CommaWithoutDigitOnBothSides_ReturnsFalse(string input)
+    {
+        var success = AnswerFormat.TryParse(input, out _);
+
+        Assert.False(success);
+    }
+
     // The answer is read the same way when the server runs with English settings
     [Theory]
     [Trait("TestCase", "TC-012")]

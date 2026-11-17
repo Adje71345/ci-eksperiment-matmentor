@@ -24,6 +24,10 @@ public static class AnswerFormat
         if (trimmed.Contains('.'))
             return false;
 
+        //Experiment only: a comma must have a digit on both sides, so ",5" and "3," are rejected.
+        if (trimmed.StartsWith(',') || trimmed.EndsWith(','))
+            return false;
+
         return decimal.TryParse(
             trimmed,
             NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
