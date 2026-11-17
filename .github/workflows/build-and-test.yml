@@ -25,6 +25,10 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v7
+        # Experiment only: fetch one extra level of history,
+        # so the next step can show the tested commit's parents.
+        with:
+          fetch-depth: 2
 
       # Experiment only: shows which commit this run tests.
       # Remove this step before the workflow goes into the team repo.
